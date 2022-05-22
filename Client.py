@@ -1,13 +1,13 @@
 import socket
 import sys
-
+#Initiating the socket
 Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 Socket.connect((socket.gethostname(), 1234))
 
 
-UserName=input("Enter User Name\n")
-Socket.send(UserName.encode())
-airport_Icao=input("Enter the Airport code ICAO\n")
+user_Name = input("Enter User Name: ")
+Socket.send(user_Name.encode())
+airport_Icao = input("Enter the Airport code ICAO: ")
 Socket.send(airport_Icao.encode())
 while True:
     print("Please Choose the option Number\n"
@@ -29,13 +29,13 @@ while True:
 
     if Menu == '3':
         Socket.send(Menu.encode())
-        city = input("Enter the city name \n")
+        city = input("Enter the departure city code (iata): ")
         Socket.send(city.encode())
         Data = Socket.recv(60000)
         print(Data.decode('utf-8'))
     if Menu == '4':
         Socket.send(Menu.encode())
-        flight_Code = input("Enter flight code IATA \n")
+        flight_Code = input("Enter flight code (iata): ")
         Socket.send(flight_Code.encode())
         Data = Socket.recv(60000)
         print(Data.decode('utf-8'))
@@ -44,4 +44,3 @@ while True:
         print("Exiting the program \n Good Bye.")
         Socket.close()
         sys.exit()
-
